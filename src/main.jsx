@@ -10,6 +10,8 @@ import Profile from './components/Profile'
 import ThemeProvider from './context/ThemeContext';
 import UserProvider from './context/UserContext';
 import LoginProvider from './context/LoginContext';
+import CheckoutPage from './components/checkout/CheckoutPage';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 const router = createBrowserRouter([
   {
@@ -22,21 +24,30 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <LoginProvider><Loginuser /></LoginProvider>,
+    element: <Loginuser />,
   },
   {
     path: '/profile',
-    element: <Profile />,
+    element: <UserProvider><Profile /></UserProvider>,
+  },
+  {
+    path: '/checkout',
+    element: <CheckoutPage />,
   }
 
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <UserProvider>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </UserProvider>
+    <PayPalScriptProvider options={{
+      "client-id": "AUZq2G0a1m8J9wzoEv71xSFYHXZwLuaDKBmClE1UXlLJHlp0w7KDL6Q5U9l5w3giNQXvufkeLPRoidTS", components: "buttons",
+      currency: "USD"
+    }}>
+      <UserProvider>
+        <ThemeProvider>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </UserProvider>
+    </PayPalScriptProvider>
   </React.StrictMode>,
 )

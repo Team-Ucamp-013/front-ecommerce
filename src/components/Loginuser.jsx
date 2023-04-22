@@ -5,14 +5,21 @@ import { UserContext } from '../context/UserContext'
 
 const Loginuser = () => {
   const [loginUser, setLoginUser] = useState()
-  const { userData, setUserData } = useContext(UserContext)
+  const { userData, saveUser } = useContext(UserContext)
 
   const url = 'http://localhost:4000/api/v1/auth/login'
   const url2 = 'http://localhost:4000/api/v1/users/me'
   const navigation = useNavigate()
 
+  // useEffect(() => {
+  //   console.log(userData)
+  //   if (Object.keys(userData).length > 0) {
+  //     navigation('/profile')
+  //   }
+  // }, []);
+
   const handleSubmit = async () => {
-    console.log(loginUser)
+
     axios.post(url, loginUser)
       .then(res => {
         console.log(res.data)
@@ -24,7 +31,7 @@ const Loginuser = () => {
             }
           }).then(response => {
             console.log(response.data)
-            setUserData(response.data)
+            saveUser(response.data)
             navigation('/profile')
           })
         )
@@ -41,7 +48,8 @@ const Loginuser = () => {
   }
 
   useEffect(() => {
-    if (Object.keys(userData).length !== 0) {
+    console.log('pokemon', userData)
+    if (userData) {
       navigation('/profile')
     }
   }, []);

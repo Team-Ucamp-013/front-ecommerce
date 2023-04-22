@@ -1,10 +1,15 @@
 import React from 'react'
+import IndexLayout from './layouts'
 
 const Profile = () => {
-  return (
+
+  const content = (
     <div>
       Profile
     </div>
+  )
+  return (
+    <IndexLayout render={content} />
   )
 }
 

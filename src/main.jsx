@@ -2,26 +2,30 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
-import { createBrowserRouter,RouterProvider} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import FormUser from './components/FormUser'
 import Loginuser from './components/Loginuser'
 import Profile from './components/Profile'
+import ThemeProvider from './context/ThemeContext';
+import UserProvider from './context/UserContext';
+import LoginProvider from './context/LoginContext';
 
 const router = createBrowserRouter([
   {
-    path:'/',
+    path: '/',
     element: <App />,
   },
   {
-  path:'/register',
-  element: <FormUser />,
+    path: '/register',
+    element: <FormUser />,
   },
   {
-    path:'/login',
-    element: <Loginuser />,
+    path: '/login',
+    element: <LoginProvider><Loginuser /></LoginProvider>,
   },
   {
-    path:'/profile',
+    path: '/profile',
     element: <Profile />,
   }
 
@@ -29,6 +33,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider  router={router}/>
+    <UserProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </UserProvider>
   </React.StrictMode>,
 )

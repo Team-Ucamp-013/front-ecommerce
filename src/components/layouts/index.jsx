@@ -27,6 +27,7 @@ const IndexLayout = ({ render }) => {
               userData &&
               <Nav.Link href="/profile">{userData.username}</Nav.Link>
             }
+            <Nav.Link href="/checkout">Checkout</Nav.Link>
           </Nav>
           <Form>
             <Form.Check // prettier-ignore

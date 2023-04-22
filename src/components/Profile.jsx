@@ -7,13 +7,6 @@ const Profile = () => {
   const { userData } = useContext(UserContext)
   const navigation = useNavigate()
 
-  // useEffect(() => {
-  //   console.log('aqui =>', userData)
-  //   if (Object.keys(userData).length === 0) {
-  //     navigation('/login')
-  //   }
-  // }, []);
-
   const content = (
     <div>
       Profile
